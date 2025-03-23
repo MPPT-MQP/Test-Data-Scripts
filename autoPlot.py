@@ -20,6 +20,8 @@ import os
 #    ADD YOUR PATH TO THE FOLDER WITH CSV FILES
 ####################################################
 # path = "C:/Users/temp/Documents/WPI/MQP/TestData/TestGraphData"
+print("============\nMQP GRAPHING: \nEntire folder will be read and ALL CSV files will be converted into graphs."
+"\nGraphs will be placed in the graphs subdirectory in your specified path.\n\n")
 path = input("Enter folder path to CSV files: ")
 
 userInput = input("Is this path correct? (y/n): " + path + " ")
