@@ -216,6 +216,38 @@ for csvFile in filesToGraph:
     fig.savefig(resultsPath + SaveFileName + '.svg', dpi=fig.dpi, bbox_inches='tight', pad_inches=0.5)
     plt.close()
 
+
+
+    """ Create Efficiency vs time graph """
+    x = TimeSec
+    y1 = df.iloc[:, 4] #Y1  is col 2 (PM1 W)
+    y2 = df.iloc[:, 7] #Y2 is col 5 (PM2 W)
+
+
+    #Create efficiency list from PM2 and PM1 power
+    y1Array = np.array(y1)
+    y2Array = np.array(y2)
+    y = (y2Array/y1Array) *100 # Efficiency of DC DC converter in %
+
+    fig, ax = plt.subplots()
+    ax.plot(x,y, c="#AC2B37")
+    fig.set_size_inches(12, 8, forward=True)
+    plt.xlabel("Time (S)")
+    plt.ylabel("Efficiency (%)")
+    plt.title("Efficiency vs Time")
+    plt.grid(which='major', linestyle='-', linewidth=1, alpha=0.8)
+    ax.minorticks_on()
+    plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
+    # ax.set_ylim([0, 1300])
+
+    SaveFileName = GraphName + "- Efficiency vs Time"
+
+    fig.savefig(resultsPath + SaveFileName + '.svg', dpi=fig.dpi, bbox_inches='tight', pad_inches=0.5)
+    plt.close()
+
+
+
+
     i=i+1
 
 print("Graphs Created")
