@@ -185,7 +185,6 @@ for csvFile in filesToGraph:
     ax2.set_ylim(bottom = 0, top = ylim)
     # Function add a legend
     plt.legend(handles = [Power, Light], loc="center left")
-
     SaveFileName = GraphName + "- Power vs Time W-Light"
 
     fig.savefig(resultsPath + SaveFileName + '.svg', dpi=fig.dpi, bbox_inches='tight', pad_inches=0.5)
