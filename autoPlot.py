@@ -388,7 +388,7 @@ for csvFile in filesToGraph:
         ax.add_artist(first_legend)
 
         # Function add a legend
-        plt.legend(handles = [Power, Light], loc="best")
+        plt.legend(handles = [Power, Light], loc="lower right")
 
         SaveFileName = GraphName + "- Power vs Time W-Light"
 
