@@ -8,6 +8,18 @@ from numpy.polynomial import Polynomial
 import os
 from dataclasses import dataclass
 
+# ###################################
+# ADD LINE FOR MPP MAX POWER ESTIMATE
+MPPPower = 18.4
+MPPcolor = '#758E4F'
+MPPLineFlag = True
+MPPLight = 810.9
+# This was at 810.9 W/m^2
+
+def printMPPLine():
+    ax.axhline(y=MPPPower, color=MPPcolor, linestyle='--')
+    ax.annotate("MPP Power @ "+str(MPPLight)+ " W/m^2", xy= (0.09,MPPPower), xytext=(0.09, MPPPower + 0.05), size= '10', bbox=dict(boxstyle="round, pad=0.009", facecolor="white", edgecolor='none', alpha=0.4))
+
 # File Picker
 # Tk.Tk().withdraw() # prevents an empty tkinter window from appearing
 
@@ -30,7 +42,6 @@ userInput = input("Is this path correct? (y/n): " + path + " ")
 if userInput != 'y':
     print("Stopping Execution")
     quit()
-
 
 filesToGraph = []
 fileNameList = []
@@ -99,6 +110,7 @@ for csvFile in filesToGraph:
     plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
     ax.set_ylim([0, 2.5])
     ax.set_xlim([0, 25])
+    
 
     SaveFileName = GraphName + "- Current vs Voltage"
 
@@ -118,6 +130,8 @@ for csvFile in filesToGraph:
 
     fig, ax = plt.subplots()
     ax.scatter(x,y, marker= "^", c="#AC2B37")
+    if(MPPLineFlag):
+        printMPPLine()
     fig.set_size_inches(12, 8, forward=True)
     plt.xlabel("Voltage (V)")
     plt.ylabel("Power (W)")
@@ -126,6 +140,7 @@ for csvFile in filesToGraph:
     ax.minorticks_on()
     plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
     # ax.set_ylim([0, 30])
+    plt.xlim(xmin=0.0)
 
     SaveFileName = GraphName + "- Power vs Voltage"
 
@@ -146,6 +161,8 @@ for csvFile in filesToGraph:
     fig, ax = plt.subplots()
     ax.plot(x,y, c="#AC2B37")
     ax.scatter(x,y, marker= "^", c="#AC2B37")
+    if(MPPLineFlag):
+        printMPPLine()
     fig.set_size_inches(12, 8, forward=True)
     plt.xlabel("Time (S)")
     plt.ylabel("Power (W)")
@@ -154,6 +171,7 @@ for csvFile in filesToGraph:
     ax.minorticks_on()
     plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
     ax.set_ylim([0, 30])
+    plt.xlim(xmin=0.0)
 
     SaveFileName = GraphName + "- Power vs Time"
 
@@ -170,6 +188,8 @@ for csvFile in filesToGraph:
     Power, = ax.plot(x,y, c="#AC2B37", label = "Power")
     ax.scatter(x,y, marker= "^", c="#AC2B37")
     Light, = ax2.plot(x,z, c="#003f5c", label = "Light")
+    if(MPPLineFlag):
+        printMPPLine()
     fig.set_size_inches(12, 8, forward=True)
     ax.set_xlabel("Time (S)")
     ax.set_ylabel("Power (W)")
@@ -183,6 +203,7 @@ for csvFile in filesToGraph:
     ylim = ax2.get_ylim()
     ylim = ylim[1] * (1.1)
     ax2.set_ylim(bottom = 0, top = ylim)
+    plt.xlim(xmin=0.0)
     # Function add a legend
     plt.legend(handles = [Power, Light], loc="center left")
     SaveFileName = GraphName + "- Power vs Time W-Light"
@@ -210,6 +231,7 @@ for csvFile in filesToGraph:
     ax.minorticks_on()
     plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
     # ax.set_ylim([0, 1300])
+    plt.xlim(xmin=0.0)
 
     SaveFileName = GraphName + "- Light vs Time"
 
@@ -239,6 +261,7 @@ for csvFile in filesToGraph:
     ax.minorticks_on()
     plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
     # ax.set_ylim([0, 1300])
+    plt.xlim(xmin=0.0)
 
     SaveFileName = GraphName + "- Efficiency vs Time"
 
@@ -257,6 +280,8 @@ for csvFile in filesToGraph:
         Power, = ax.plot(x,y, c="#AC2B37", label = "Power")
         ax.scatter(x,y, marker= "^", c="#AC2B37")
         Light, = ax2.plot(x,z, c="#003f5c", label = "Temperature")
+        if(MPPLineFlag):
+            printMPPLine()
         fig.set_size_inches(12, 8, forward=True)
         ax.set_xlabel("Time (S)")
         ax.set_ylabel("Power (W)")
@@ -270,6 +295,7 @@ for csvFile in filesToGraph:
         ylim = ax2.get_ylim()
         ylim = ylim[1] * (1.1)
         ax2.set_ylim(bottom = 0, top = ylim)
+        plt.xlim(xmin=0.0)
         # Function add a legend
         plt.legend(handles = [Power, Light], loc="center left")
 
@@ -350,6 +376,8 @@ for csvFile in filesToGraph:
         Power, = ax.plot(x,y, c="#AC2B37", label = "Power")
         ax.scatter(x,y, marker= "^", c="#AC2B37")
         Light, = ax2.plot(x,z, c="#003f5c", label = "Light")
+        if(MPPLineFlag):
+            printMPPLine()
         fig.set_size_inches(12, 8, forward=True)
         ax.set_xlabel("Time (S)")
         ax.set_ylabel("Power (W)")
@@ -363,6 +391,7 @@ for csvFile in filesToGraph:
         ylim = ax2.get_ylim()
         ylim = ylim[1] * (1.1)
         ax2.set_ylim(bottom = 0, top = ylim)
+        plt.xlim(xmin=0.0)
 
         # Add in custom shaded sections
         algoHandles = []
