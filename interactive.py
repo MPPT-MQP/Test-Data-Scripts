@@ -34,7 +34,8 @@ print("\nWhat graph do you want to make?"
 "\n4- power vs time graph + light"
 "\n5- light vs time"
 "\n6- power vs time graph + temperature"
-"\n7- AOFA - power vs time graph + light")
+"\n7- AOFA - power vs time graph + light"
+"\n8- Voltage vs time")
 graphNumber = input("Enter number: ")
 
 print("\n\nRight click to place measurement"
@@ -299,6 +300,24 @@ if(graphNumber.isnumeric()):
 
             # Function add a legend
             plt.legend(handles = [Power, Light], loc="lower right")
+
+        case 8:
+            """ Create voltage vs time graph """
+            x = TimeSec
+            y = df.iloc[:, 2] #Y axis is col 2
+
+
+            fig, ax = plt.subplots()
+            ax.plot(x,y, c="#AC2B37")
+            ax.scatter(x,y, marker= "^", c="#AC2B37")
+            fig.set_size_inches(12, 8, forward=True)
+            plt.xlabel("Time (S)")
+            plt.ylabel("Voltage (V)")
+            plt.title("Voltage vs Time")
+            plt.grid(which='major', linestyle='-', linewidth=1, alpha=0.8)
+            ax.minorticks_on()
+            plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
+            # ax.set_ylim([0, 30])
 
 
 # ENABLE POINT SELECTION AND SHOW PLOT
