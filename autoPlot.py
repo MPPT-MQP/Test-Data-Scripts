@@ -12,7 +12,7 @@ from dataclasses import dataclass
 # ADD LINE FOR MPP MAX POWER ESTIMATE
 MPPPower = 18.4
 MPPcolor = '#758E4F'
-MPPLineFlag = True
+MPPLineFlag = False
 MPPLight = 810.9
 # This was at 810.9 W/m^2
 
