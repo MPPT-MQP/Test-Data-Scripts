@@ -4,7 +4,7 @@ Solar Panel Graphing Scripts + Test Data and Graphs
 ## Test Data
 CSV files containing measurements for all tests can be found in the TestData folder. Each folder also contains graphs for each test.
 
-## How to use
+## How to Use Scripts
 Once all required packages are installed run one of the following:
 - autoPlot.py
 - recovery.py
@@ -20,3 +20,5 @@ Plots power vs time with irradiance from the specified csv file that is selected
 
 #### interactive.py
 Plots one of the seven possible graphs from the specified csv file that is selected from the file picker. Graph can be adjusted interactively and points can be selected by right clicking or removed by left clicking
+
+##### Author: 

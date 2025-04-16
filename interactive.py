@@ -134,7 +134,8 @@ if(graphNumber.isnumeric()):
             ax.set_xlabel("Time (S)")
             ax.set_ylabel("Power (W)")
             ax2.set_ylabel("Light (W/m^2)")
-            plt.title("Power and Light vs Time - " + fileName)
+            # plt.title("Power and Light vs Time - " + fileName)
+            plt.title("Power and Light vs Time")
             ax.grid(which='major', linestyle='-', linewidth=1, alpha=0.8)
             ax.minorticks_on()
             ax2.minorticks_on()
@@ -291,7 +292,7 @@ if(graphNumber.isnumeric()):
                     
                 # get x values in time array and color from algoDict and make a colored area with 10% transparency
                 algoHandles.append(ax.axvspan(TimeSec[algoDict.get("start")], TimeSec[algoDict.get("end")], facecolor=algoDict.get("color"),
-                alpha=0.1, label= label))
+                alpha=0.20, label= label))
 
 
             # Create seperate color legend
@@ -304,7 +305,7 @@ if(graphNumber.isnumeric()):
         case 8:
             """ Create voltage vs time graph """
             x = TimeSec
-            y = df.iloc[:, 2] #Y axis is col 2
+            y = df.iloc[:, 8] #Y axis is col 2
 
 
             fig, ax = plt.subplots()
