@@ -21,4 +21,6 @@ Plots power vs time with irradiance from the specified csv file that is selected
 #### interactive.py
 Plots one of the seven possible graphs from the specified csv file that is selected from the file picker. Graph can be adjusted interactively and points can be selected by right clicking or removed by left clicking
 
-##### Author: 
+---
+##### Author: Kyle Rabbitt, Frank Parsons
+##### Organization: MPPT MQP @ WPI
