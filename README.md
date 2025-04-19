@@ -19,7 +19,7 @@ Within a folder than contains CSV files, a graphs subfolder is created. Within t
 Plots power vs time with irradiance from the specified csv file that is selected from the file picker. Graph can be adjusted interactively and points can be selected by right clicking or removed by left clicking
 
 #### interactive.py
-Plots one of the seven possible graphs from the specified csv file that is selected from the file picker. Graph can be adjusted interactively and points can be selected by right clicking or removed by left clicking
+Plots one of the ten possible graphs from a csv file that is selected from the file picker. Graph can be adjusted interactively and points can be selected by right clicking or removed by left clicking. Two of the graphs are animated so it appears that the data is being plotted in real time.
 
 ---
 ##### Author: Kyle Rabbitt, Frank Parsons
