@@ -6,7 +6,7 @@ CSV files containing measurements for all tests can be found in the TestData fol
 
 ## Animations
 Within the docs folder, there are a series of video and HTML animations that show both power vs time and power vs voltage graphs being plotted. 
-<br><br>These can be seen on the GitHub Pages linked here: <br>https://mppt-mqp.github.io/Test-Data-Scripts/
+<br><br>These can be seen on a GitHub Page linked here: <br>https://mppt-mqp.github.io/Test-Data-Scripts/
 
 ## How to Use Scripts
 Once all required packages are installed run one of the following:
