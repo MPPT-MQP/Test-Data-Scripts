@@ -400,8 +400,8 @@ if(graphNumber.isnumeric()):
                 print("\nFinished!")
             else:
                 plt.show()
-                plt.close()
-        # case 10:
+                # plt.close()
+        case 10:
             """ Create power vs voltage graph LIVE"""
             x = df.iloc[:, 2] #X axis is col 2
             y = df.iloc[:, 4] #Y axis is col 4
