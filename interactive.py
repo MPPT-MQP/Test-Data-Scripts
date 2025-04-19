@@ -5,6 +5,7 @@ import tkinter as Tk
 from tkinter import filedialog
 from datetime import datetime
 from numpy.polynomial import Polynomial
+from matplotlib.animation import FuncAnimation 
 import os
 from dataclasses import dataclass
 import mplcursors
@@ -35,7 +36,9 @@ print("\nWhat graph do you want to make?"
 "\n5- light vs time"
 "\n6- power vs time graph + temperature"
 "\n7- AOFA - power vs time graph + light"
-"\n8- Voltage vs time")
+"\n8- Voltage vs time"
+"\n9- power vs time LIVE"
+"\n10- power vs voltage LIVE")
 graphNumber = input("Enter number: ")
 
 print("\n\nRight click to place measurement"
@@ -319,6 +322,67 @@ if(graphNumber.isnumeric()):
             ax.minorticks_on()
             plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
             # ax.set_ylim([0, 30])
+
+        case 9:
+            """ Create power vs time graph LIVE """
+            x = TimeSec
+            y = df.iloc[:, 4] #Y axis is col 4
+
+            fig, ax = plt.subplots()
+
+            # ax.plot(x,y, c="#AC2B37")
+            # ax.scatter(x,y, marker= "^", c="#AC2B37")
+            # initializing a line variable   
+            
+            # data which the line will  
+            # contain (x, y) 
+            xNew= []
+            yNew= []
+            def animate(i): 
+                xNew = x[0:i] 
+                yNew = y[0:i]
+                ax.plot(xNew, yNew, c="#AC2B37")
+            
+            fig.set_size_inches(12, 8, forward=True)
+            plt.xlabel("Time (S)")
+            plt.ylabel("Power (W)")
+            plt.title("Power vs Time")
+            plt.grid(which='major', linestyle='-', linewidth=1, alpha=0.8)
+            ax.minorticks_on()
+            plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
+            ax.set_ylim([0, 30])
+            
+            
+            anim = FuncAnimation(fig, animate, interval = 300, frames=200)
+            plt.show()
+            # anim.save('continuousSineWave.mp4',  writer = 'ffmpeg', fps = 30, frames=100)
+
+        case 10:
+            """ Create power vs voltage graph LIVE"""
+            x = df.iloc[:, 2] #X axis is col 2
+            y = df.iloc[:, 4] #Y axis is col 4
+
+            xNew= []
+            yNew= []
+            def animate(i): 
+                xNew = x[i] 
+                yNew = y[i]
+                ax.scatter(xNew, yNew, c="#AC2B37", marker= "^", s=100)
+
+            fig, ax = plt.subplots()
+            # ax.scatter(x,y, marker= "^", c="#AC2B37")
+            fig.set_size_inches(12, 8, forward=True)
+            plt.xlabel("Voltage (V)")
+            plt.ylabel("Power (W)")
+            plt.title("Power vs Voltage")
+            plt.grid(which='major', linestyle='-', linewidth=1, alpha=0.8)
+            ax.minorticks_on()
+            plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
+            ax.set_xlim([0, 24])
+            ax.set_ylim([0, 28])
+            anim = FuncAnimation(fig, animate, interval = 300, frames=200)
+            plt.show()
+            # anim.save('continuousSineWave.mp4',  writer = 'ffmpeg', fps = 30, frames=100)
 
 
 # ENABLE POINT SELECTION AND SHOW PLOT
