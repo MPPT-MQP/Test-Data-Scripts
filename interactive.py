@@ -15,11 +15,16 @@ import mplcursors
 # File Picker
 Tk.Tk().withdraw() # prevents an empty tkinter window from appearing
 
-filepath = filedialog.askopenfilename()
+filepath = filedialog.askopenfilename(filetypes=(("CSV files", "*.csv"),))
 # print(filepath)
 
 fileName = os.path.basename(filepath)
 print(fileName)
+
+# Find algo that is running
+algoRunning = fileName.split("__")[1]
+algoRunning = algoRunning.split(".")[0]
+print("Algorithm: " + algoRunning)
 # ******************************
 #       Enter CSV File Name
 # ******************************
@@ -41,8 +46,8 @@ print("\nWhat graph do you want to make?"
 "\n10- power vs voltage LIVE")
 graphNumber = input("Enter number: ")
 
-print("\n\nRight click to place measurement"
-"\n Left click to remove")
+print("\n\n-Right click to place measurement"
+"\n-Left click to remove")
 
 # Global Text size and font config
 plt.rc('font', size=20) #Set font size
@@ -346,16 +351,16 @@ if(graphNumber.isnumeric()):
             fig.set_size_inches(12, 8, forward=True)
             plt.xlabel("Time (S)")
             plt.ylabel("Power (W)")
-            plt.title("Power vs Time")
+            plt.title("Power vs Time- " + algoRunning)
             plt.grid(which='major', linestyle='-', linewidth=1, alpha=0.8)
             ax.minorticks_on()
             plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
             ax.set_ylim([0, 30])
             
             
-            anim = FuncAnimation(fig, animate, interval = 300, frames=200)
+            anim = FuncAnimation(fig, animate, interval = 250, frames=200)
             plt.show()
-            # anim.save('continuousSineWave.mp4',  writer = 'ffmpeg', fps = 30, frames=100)
+            # anim.save('continuousSineWave.mp4',  writer = 'ffmpeg')
 
         case 10:
             """ Create power vs voltage graph LIVE"""
@@ -374,7 +379,7 @@ if(graphNumber.isnumeric()):
             fig.set_size_inches(12, 8, forward=True)
             plt.xlabel("Voltage (V)")
             plt.ylabel("Power (W)")
-            plt.title("Power vs Voltage")
+            plt.title("Power vs Voltage- " + algoRunning)
             plt.grid(which='major', linestyle='-', linewidth=1, alpha=0.8)
             ax.minorticks_on()
             plt.grid(which='minor', linestyle='--', linewidth=0.5, alpha=0.8)
@@ -382,7 +387,7 @@ if(graphNumber.isnumeric()):
             ax.set_ylim([0, 28])
             anim = FuncAnimation(fig, animate, interval = 300, frames=200)
             plt.show()
-            # anim.save('continuousSineWave.mp4',  writer = 'ffmpeg', fps = 30, frames=100)
+            # anim.save('continuousSineWave1.mp4',  writer = 'ffmpeg', fps = 1)
 
 
 # ENABLE POINT SELECTION AND SHOW PLOT
