@@ -5,12 +5,11 @@ import tkinter as Tk
 from tkinter import filedialog
 from datetime import datetime
 from numpy.polynomial import Polynomial
-from matplotlib.animation import FuncAnimation 
+from matplotlib.animation import FuncAnimation
+import matplotlib.animation as animation 
 import os
 from dataclasses import dataclass
 import mplcursors
-
-
 
 # File Picker
 Tk.Tk().withdraw() # prevents an empty tkinter window from appearing
@@ -31,8 +30,11 @@ print("\nAlgorithm: " + algoRunning)
 csvFile = filepath
 
 print("\nCreating graphs for: " + csvFile)
+
+# Read in csv file using pandas
 df = pd.read_csv(csvFile, encoding='ISO-8859-1', sep=',', usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])
 
+# select which graph to make
 print("\nWhat graph do you want to make?"
 "\n1- Voltage vs current"
 "\n2- power vs voltage"
@@ -46,11 +48,42 @@ print("\nWhat graph do you want to make?"
 "\n10- power vs voltage LIVE")
 graphNumber = input("Enter number: ")
 
+# Check if any video encoding solutions are available
+def ffmpeg_available():
+    return animation.writers.is_available('ffmpeg')
+def html_available():
+    return animation.writers.is_available('html')
+
+# User select what to do if live plotting selected
 vidFlag = ""
+writer = ""
 if str(graphNumber) == '9' or str(graphNumber) == '10':
-    print("\nPress ENTER to run live, Type V to record video")
+
+    print("\nENTER = run live | V = video | H = html playback")
     vidFlag = input(">>")
 
+    # Check if option is possible
+    if vidFlag == "V" and ffmpeg_available():
+        print("\nffmpeg found!")
+        writer = 'ffmpeg'
+        resultsPath = "./Animations/Videos/"
+    elif vidFlag == "H" and html_available():
+        print("\nhtml found!")
+        writer = 'html'
+        resultsPath = "./Animations/HTML/"
+    else:
+        print("ERROR: Please install ffmpeg to save a video or HTML5 to do html playback")
+        quit()
+
+    # Check if subdir exists, if not create it
+    try:
+        os.makedirs(resultsPath)
+    except FileExistsError:
+    # directory already exists
+        pass
+
+
+# Print instructions on how to place markers
 print("\n\n-Right click to place measurement"
 "\n-Left click to remove")
 
@@ -340,16 +373,11 @@ if(graphNumber.isnumeric()):
 
             fig, ax = plt.subplots()
 
-            # ax.plot(x,y, c="#AC2B37")
-            # ax.scatter(x,y, marker= "^", c="#AC2B37")
-            # initializing a line variable   
-            
-            # data which the line will  
-            # contain (x, y) 
+            # Blank x, y arrays
             xNew= []
             yNew= []
             def animate(i): 
-                xNew = x[0:i] 
+                xNew = x[0:i]   # Add values to the array as i increases and then plot them
                 yNew = y[0:i]
                 ax.plot(xNew, yNew, c="#AC2B37")
             
@@ -363,9 +391,9 @@ if(graphNumber.isnumeric()):
             ax.set_ylim([0, 30])
             
             
-            anim = FuncAnimation(fig, animate, interval = 250, frames=200)
+            anim = FuncAnimation(fig, animate, interval = 250, frames=200) #Interval = how fast to animate, frames = how long before stopping
             if vidFlag == "V":
-                anim.save('Power-vs-Time-'+ algoRunning+'.mp4',  writer = 'ffmpeg')
+                anim.save('Power-vs-Time-'+ algoRunning+'.html',  writer = writer)
             else:
                 plt.show()
 
@@ -394,7 +422,7 @@ if(graphNumber.isnumeric()):
             ax.set_ylim([0, 28])
             anim = FuncAnimation(fig, animate, interval = 300, frames=200)
             if vidFlag == "V":
-                anim.save('Power-vs-Voltage-'+ algoRunning+'.mp4',  writer = 'ffmpeg')
+                anim.save('Power-vs-Voltage-'+ algoRunning+'.mp4',  writer = writer)
             else:
                 plt.show()
 
