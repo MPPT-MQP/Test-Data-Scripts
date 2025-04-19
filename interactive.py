@@ -395,7 +395,9 @@ if(graphNumber.isnumeric()):
             
             anim = FuncAnimation(fig, animate, interval = 250, frames=200) #Interval = how fast to animate, frames = how long before stopping
             if vidFlag == "V" or vidFlag == "H":
-                anim.save('Power-vs-Time-'+ algoRunning+fileExtension,  writer = writer)
+                print("\nCreating Annimation....")
+                anim.save(resultsPath+'Power-vs-Time-'+ algoRunning+fileExtension,  writer = writer)
+                print("\nFinished!")
             else:
                 plt.show()
 
@@ -424,7 +426,9 @@ if(graphNumber.isnumeric()):
             ax.set_ylim([0, 28])
             anim = FuncAnimation(fig, animate, interval = 300, frames=200)
             if vidFlag == "V" or vidFlag == "H":
-                anim.save('Power-vs-Voltage-'+ algoRunning+fileExtension,  writer = writer)
+                print("\nCreating Annimation....")
+                anim.save(resultsPath+'Power-vs-Voltage-'+ algoRunning+fileExtension,  writer = writer)
+                print("\nFinished!")
             else:
                 plt.show()
 
