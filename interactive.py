@@ -67,10 +67,12 @@ if str(graphNumber) == '9' or str(graphNumber) == '10':
         print("\nffmpeg found!")
         writer = 'ffmpeg'
         resultsPath = "./Animations/Videos/"
+        fileExtension = '.mp4'
     elif vidFlag == "H" and html_available():
         print("\nhtml found!")
         writer = 'html'
         resultsPath = "./Animations/HTML/"
+        fileExtension = '.html'
     else:
         print("ERROR: Please install ffmpeg to save a video or HTML5 to do html playback")
         quit()
@@ -393,7 +395,7 @@ if(graphNumber.isnumeric()):
             
             anim = FuncAnimation(fig, animate, interval = 250, frames=200) #Interval = how fast to animate, frames = how long before stopping
             if vidFlag == "V" or vidFlag == "H":
-                anim.save('Power-vs-Time-'+ algoRunning+'.html',  writer = writer)
+                anim.save('Power-vs-Time-'+ algoRunning+fileExtension,  writer = writer)
             else:
                 plt.show()
 
@@ -422,7 +424,7 @@ if(graphNumber.isnumeric()):
             ax.set_ylim([0, 28])
             anim = FuncAnimation(fig, animate, interval = 300, frames=200)
             if vidFlag == "V" or vidFlag == "H":
-                anim.save('Power-vs-Voltage-'+ algoRunning+'.mp4',  writer = writer)
+                anim.save('Power-vs-Voltage-'+ algoRunning+fileExtension,  writer = writer)
             else:
                 plt.show()
 
