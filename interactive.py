@@ -66,12 +66,12 @@ if str(graphNumber) == '9' or str(graphNumber) == '10':
     if vidFlag == "V" and ffmpeg_available():
         print("\nffmpeg found!")
         writer = 'ffmpeg'
-        resultsPath = "./Animations/Videos/"
+        resultsPath = "./doc/Animations/Videos/"
         fileExtension = '.mp4'
     elif vidFlag == "H" and html_available():
         print("\nhtml found!")
         writer = 'html'
-        resultsPath = "./Animations/HTML/"
+        resultsPath = "./doc/Animations/HTML/"
         fileExtension = '.html'
     else:
         print("ERROR: Please install ffmpeg to save a video or HTML5 to do html playback")
