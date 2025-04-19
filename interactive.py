@@ -19,18 +19,18 @@ filepath = filedialog.askopenfilename(filetypes=(("CSV files", "*.csv"),))
 # print(filepath)
 
 fileName = os.path.basename(filepath)
-print(fileName)
+# print(fileName)
 
 # Find algo that is running
 algoRunning = fileName.split("__")[1]
 algoRunning = algoRunning.split(".")[0]
-print("Algorithm: " + algoRunning)
+print("\nAlgorithm: " + algoRunning)
 # ******************************
 #       Enter CSV File Name
 # ******************************
 csvFile = filepath
 
-print("Creating graphs for: " + csvFile)
+print("\nCreating graphs for: " + csvFile)
 df = pd.read_csv(csvFile, encoding='ISO-8859-1', sep=',', usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])
 
 print("\nWhat graph do you want to make?"
@@ -45,6 +45,11 @@ print("\nWhat graph do you want to make?"
 "\n9- power vs time LIVE"
 "\n10- power vs voltage LIVE")
 graphNumber = input("Enter number: ")
+
+vidFlag = ""
+if str(graphNumber) == '9' or str(graphNumber) == '10':
+    print("\nPress ENTER to run live, Type V to record video")
+    vidFlag = input(">>")
 
 print("\n\n-Right click to place measurement"
 "\n-Left click to remove")
@@ -359,8 +364,10 @@ if(graphNumber.isnumeric()):
             
             
             anim = FuncAnimation(fig, animate, interval = 250, frames=200)
-            plt.show()
-            # anim.save('continuousSineWave.mp4',  writer = 'ffmpeg')
+            if vidFlag == "V":
+                anim.save('Power-vs-Time-'+ algoRunning+'.mp4',  writer = 'ffmpeg')
+            else:
+                plt.show()
 
         case 10:
             """ Create power vs voltage graph LIVE"""
@@ -386,8 +393,10 @@ if(graphNumber.isnumeric()):
             ax.set_xlim([0, 24])
             ax.set_ylim([0, 28])
             anim = FuncAnimation(fig, animate, interval = 300, frames=200)
-            plt.show()
-            # anim.save('continuousSineWave1.mp4',  writer = 'ffmpeg', fps = 1)
+            if vidFlag == "V":
+                anim.save('Power-vs-Voltage-'+ algoRunning+'.mp4',  writer = 'ffmpeg')
+            else:
+                plt.show()
 
 
 # ENABLE POINT SELECTION AND SHOW PLOT
