@@ -4,6 +4,10 @@ Solar Panel Graphing Scripts + Test Data and Graphs
 ## Test Data
 CSV files containing measurements for all tests can be found in the TestData folder. Each folder also contains graphs for each test.
 
+## Animations
+Within the docs folder, there are a series of video and HTML animations that show both power vs time and power vs voltage graphs being plotted. 
+<br><br>These can be seen on the GitHub Pages linked here: <br>https://mppt-mqp.github.io/Test-Data-Scripts/
+
 ## How to Use Scripts
 Once all required packages are installed run one of the following:
 - autoPlot.py
@@ -24,3 +28,4 @@ Plots one of the ten possible graphs from a csv file that is selected from the f
 ---
 ##### Author: Kyle Rabbitt, Frank Parsons
 ##### Organization: MPPT MQP @ WPI
+##### Attributions: Website Template by HTML5 UP @ajlkn
